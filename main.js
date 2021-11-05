@@ -75,7 +75,14 @@ for (let key in posts) {
 // Funznione che crea il Post e lo inserisce nell'HTML
 function createPost(postToInsert) {
 
-    const {content, media, author, likes, created} = postToInsert;
+    let {content, media, author, likes, created} = postToInsert;
+
+    created = created.split("-").reverse().join("-");
+    // console.log(created);
+
+    if (author.image == null) {
+        author.image = "https://unsplash.it/300/300?image=29"
+    }
 
     const post = document.createElement('div');
     post.className = 'post';
@@ -87,7 +94,7 @@ function createPost(postToInsert) {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${author.name}</div>
-            <div class="post-meta__time">4 mesi fa</div>
+            <div class="post-meta__time">${created}</div>
         </div>                    
     </div>
     </div>
