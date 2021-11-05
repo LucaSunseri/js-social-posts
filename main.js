@@ -65,17 +65,33 @@ postContainer.innerHTML = '';
 for (let key in posts) {
 
     const post = posts[key];
-    console.log(post);
+    // console.log(post);
 
-    createPost(post);
-
+    createPost(postContainer, post);
 
 }
 
-// Funznione che crea il Post e lo inserisce nell'HTML
-function createPost(postToInsert) {
+const btnLike = document.getElementsByClassName('like-button');
+// console.log(btnLike);
 
-    let {content, media, author, likes, created} = postToInsert;
+for (let i = 0; i < btnLike.length; i++) {
+
+    btnLike[i].addEventListener('click',function() {
+    console.log('Ti ho cliccato');
+
+    btnLike[i].classList.add('like-button--liked');
+    console.log(btnLike[i]);
+
+    });
+}
+
+
+
+
+// Funznione che crea il Post e lo inserisce nell'elemento HTML(target), che noi inseriamo;
+function createPost(target, postToInsert) {
+
+    let {id, content, media, author, likes, created} = postToInsert;
 
     created = created.split("-").reverse().join("-");
     // console.log(created);
@@ -105,7 +121,7 @@ function createPost(postToInsert) {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" href="#" data-postid="${id}">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
@@ -117,5 +133,5 @@ function createPost(postToInsert) {
     </div>     
     `;
 
-    postContainer.append(post);
+    target.append(post);
 }
